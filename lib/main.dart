@@ -7,6 +7,7 @@ import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
+import 'package:getxdemo/screens/overlay_page.dart';
 import 'package:getxdemo/sencond.dart';
 import 'package:getxdemo/store/main_store.dart';
 import 'package:getxdemo/third.dart';
@@ -81,6 +82,10 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: '/cart',
               page: () => const MyCart(),
+            ),
+            GetPage(
+              name: '/OverLayPage',
+              page: () => OverLayPage(),
             ),
           ],
           theme: ThemeData(
@@ -186,6 +191,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('goto overlay'),
             ),
             ElevatedButton(
+              onPressed: () => Get.toNamed('OverLayPage'),
+              child: const Text('goto overlay2'),
+            ),
+            ElevatedButton(
               onPressed: () => Get.toNamed('target'),
               child: const Text('goto target'),
             ),
@@ -217,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   tooltip.show(context);
                 },
-                child: const Text('overlay')),
+                child: const Text('tooltip')),
             SecondPage(),
             ThirdPage(),
           ],
