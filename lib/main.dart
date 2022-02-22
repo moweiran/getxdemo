@@ -7,6 +7,7 @@ import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
+import 'package:getxdemo/screens/easyrefresh.dart';
 import 'package:getxdemo/screens/overlay_page.dart';
 import 'package:getxdemo/sencond.dart';
 import 'package:getxdemo/store/main_store.dart';
@@ -86,6 +87,10 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: '/OverLayPage',
               page: () => OverLayPage(),
+            ),
+            GetPage(
+              name: '/easyrefersh',
+              page: () => EasyRefreshPage(),
             ),
           ],
           theme: ThemeData(
@@ -201,6 +206,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () => Get.toNamed('catalog'),
               child: const Text('goto catalog'),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.toNamed('easyrefersh'),
+              child: const Text('goto easyrefersh'),
             ),
             ElevatedButton(
                 onPressed: () {

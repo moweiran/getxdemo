@@ -119,7 +119,7 @@ class _MyListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("build catalog list item");
+    print("build catalog list item${index}");
     var item = context.select<CatalogModel, Item>(
       // Here, we are only interested in the item at [index]. We don't care
       // about any other change.
