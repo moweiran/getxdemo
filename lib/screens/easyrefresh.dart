@@ -2,8 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:getxdemo/models/easyrefresh_notifier.dart';
+import 'package:provider/provider.dart';
 
 class EasyRefreshPage extends StatefulWidget {
+  const EasyRefreshPage({Key? key}) : super(key: key);
+
   @override
   _EasyRefreshPageState createState() {
     return _EasyRefreshPageState();
@@ -11,13 +15,12 @@ class EasyRefreshPage extends StatefulWidget {
 }
 
 class _EasyRefreshPageState extends State<EasyRefreshPage> {
+  late EasyRefreshNotifier _provider;
+
   @override
   void initState() {
     super.initState();
-  }
-
-  Future _getData() async {
-    await Future.delayed(Duration(seconds: 3));
+    _provider = EasyRefreshNotifier();
   }
 
   @override
@@ -25,24 +28,15 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
     print('=====easy refresh build====');
     return Scaffold(
       appBar: AppBar(
-        title: Text("EasyRefresh"),
+        title: const Text("EasyRefresh"),
       ),
-      body: FutureBuilder(
-        future: _getData(),
-        builder: _builderFuture,
+      body: ChangeNotifierProvider.value(
+        value: _provider,
+        child: FutureBuilder(
+          future: _provider.loadData(),
+          builder: _builderFuture,
+        ),
       ),
-      // persistentFooterButtons: <Widget>[
-      //   FlatButton(
-      //       onPressed: () {
-      //         _controller.callRefresh();
-      //       },
-      //       child: Text("Refresh", style: TextStyle(color: Colors.black))),
-      //   FlatButton(
-      //       onPressed: () {
-      //         _controller.callLoad();
-      //       },
-      //       child: Text("Load more", style: TextStyle(color: Colors.black))),
-      // ],
     );
   }
 
@@ -64,7 +58,7 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
       case ConnectionState.done:
         print('done');
         if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-        return _buildEasyRefresh();
+        return const _BuildEasyRefresh();
       default:
         return Container();
     }
@@ -73,25 +67,26 @@ class _EasyRefreshPageState extends State<EasyRefreshPage> {
   // Widget _createListView(BuildContext context, AsyncSnapshot snapshot) {}
 }
 
-class _buildEasyRefresh extends StatefulWidget {
-  const _buildEasyRefresh({Key? key}) : super(key: key);
+class _BuildEasyRefresh extends StatefulWidget {
+  const _BuildEasyRefresh({Key? key}) : super(key: key);
 
   @override
-  __buildEasyRefreshState createState() => __buildEasyRefreshState();
+  _BuildEasyRefreshState createState() => _BuildEasyRefreshState();
 }
 
-class __buildEasyRefreshState extends State<_buildEasyRefresh> {
+class _BuildEasyRefreshState extends State<_BuildEasyRefresh> {
   late EasyRefreshController _controller;
-  // 条目总数
-  int _count = 20;
+  late EasyRefreshNotifier _provider;
   @override
   void initState() {
     super.initState();
     _controller = EasyRefreshController();
+    _provider = Provider.of<EasyRefreshNotifier>(context, listen: false);
   }
 
   @override
   Widget build(BuildContext context) {
+    print('build easyrefresh custom');
     return EasyRefresh.custom(
       enableControlFinishRefresh: false,
       enableControlFinishLoad: true,
@@ -99,38 +94,34 @@ class __buildEasyRefreshState extends State<_buildEasyRefresh> {
       header: ClassicalHeader(),
       footer: ClassicalFooter(),
       onRefresh: () async {
-        await Future.delayed(Duration(seconds: 2), () {
-          print('onRefresh');
-          setState(() {
-            _count = 20;
-          });
-          _controller.resetLoadState();
-        });
+        print('refresh');
+        await _provider.refreshData();
+        _controller.resetLoadState();
       },
       onLoad: () async {
-        await Future.delayed(Duration(seconds: 2), () {
-          print('onLoad');
-          setState(() {
-            _count += 10;
-          });
-          _controller.finishLoad(noMore: _count >= 40000);
-        });
+        print('onLoad');
+        await _provider.loadData();
+        _controller.finishLoad(noMore: _provider.count >= 40000);
       },
       slivers: <Widget>[
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              print(index);
-              return Container(
-                width: 60.0,
-                height: 60.0,
-                child: Center(
-                  child: Text('$index'),
-                ),
-                color: index % 2 == 0 ? Colors.grey[300] : Colors.transparent,
-              );
-            },
-            childCount: _count,
+        Consumer<EasyRefreshNotifier>(
+          builder: (context, value, child) => SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                print(index);
+                var item = value.getItem(index);
+                return Container(
+                  width: 60.0,
+                  height: 60.0,
+                  child: Center(
+                    child: Text(
+                        '${index}_${item.name}_${item.nickname}_${item.age}'),
+                  ),
+                  color: index % 2 == 0 ? Colors.grey[300] : Colors.transparent,
+                );
+              },
+              childCount: value.count,
+            ),
           ),
         ),
       ],
