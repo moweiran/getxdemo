@@ -19,7 +19,7 @@ class EasyRefreshNotifier extends ChangeNotifier {
   List<EasyRefreshItem>? get items => _items;
 
   Future loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     List<EasyRefreshItem> newItems = [];
     for (var i = 0; i < 15; i++) {
       var item = EasyRefreshItem(
@@ -32,6 +32,7 @@ class EasyRefreshNotifier extends ChangeNotifier {
     _items = [..._items ?? [], ...newItems];
     _count = _items!.length;
     notifyListeners();
+    // return true;
   }
 
   Future refreshData() async {

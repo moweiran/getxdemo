@@ -7,6 +7,7 @@ import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
+import 'package:getxdemo/screens/easyrefhres_demo.dart';
 import 'package:getxdemo/screens/easyrefresh.dart';
 import 'package:getxdemo/screens/overlay_page.dart';
 import 'package:getxdemo/sencond.dart';
@@ -70,11 +71,11 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: '/overlay',
               transition: Transition.cupertino,
-              page: () => Example1(),
+              page: () => const Example1(),
             ),
             GetPage(
               name: '/target',
-              page: () => TargetWidget(),
+              page: () => const TargetWidget(),
             ),
             GetPage(
               name: '/catalog',
@@ -90,7 +91,11 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(
               name: '/easyrefersh',
-              page: () => EasyRefreshPage(),
+              page: () => const EasyRefreshPage(),
+            ),
+            GetPage(
+              name: '/easyrefersh_demo',
+              page: () => const EasyRefreshDemo(),
             ),
           ],
           theme: ThemeData(
@@ -202,6 +207,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () => Get.toNamed('target'),
               child: const Text('goto target'),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.toNamed('easyrefersh_demo'),
+              child: const Text('goto easyrefresh demo'),
             ),
             ElevatedButton(
               onPressed: () => Get.toNamed('catalog'),
