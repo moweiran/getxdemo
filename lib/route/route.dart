@@ -4,6 +4,7 @@ import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
 import 'package:getxdemo/pages/indexedstack_demo.dart';
+import 'package:getxdemo/pages/lazy_indexedstack_demo.dart';
 import 'package:getxdemo/pages/pageview_demo.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/screens/cart.dart';
@@ -63,15 +64,19 @@ class DemoRoute {
         ),
         GetPage(
           name: '/ExampleHorizontal',
-          page: () => ExampleHorizontal(),
+          page: () => const ExampleHorizontal(),
         ),
         GetPage(
           name: '/indexedstack_demo',
-          page: () => IndexedStackDemo(),
+          page: () => const IndexedStackDemo(),
         ),
         GetPage(
           name: '/PageViewDemo',
-          page: () => PageViewDemo(),
+          page: () => const PageViewDemo(),
+        ),
+        GetPage(
+          name: '/lzystackdemo',
+          page: () => const LazyIndexedStackDemo(),
         ),
       ];
 }

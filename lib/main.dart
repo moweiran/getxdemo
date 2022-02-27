@@ -113,81 +113,88 @@ class _MyHomePageState extends State<MyHomePage> {
           // the App.build method, and use it to set our appbar title.
           title: Text("title".trArgs(['John'])),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Consumer<MainStoreProvider>(
-              builder: (context, value, child) {
-                print('main consumer build');
-                return Text(
-                  '===${value.count}',
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-            ElevatedButton(
-              child: Text('button_text'.tr),
-              onPressed: () {
-                print(Get.locale);
-                print(Get.deviceLocale);
-                print(Get.locale!.languageCode);
-                print(Get.fallbackLocale);
-                var languageCode = Get.locale!.languageCode;
-                if (languageCode == 'zh') {
-                  Get.updateLocale(Locale('en'));
-                } else {
-                  Get.updateLocale(Locale('zh'));
-                }
-              },
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('second'),
-              child: const Text('goto SecondPage'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('fourth'),
-              child: const Text('goto fourth'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('overlay'),
-              child: const Text('goto overlay'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('OverLayPage'),
-              child: const Text('goto overlay2'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('target'),
-              child: const Text('goto target'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('easyrefersh_demo'),
-              child: const Text('goto easyrefresh demo'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('catalog'),
-              child: const Text('goto catalog'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('easyrefersh'),
-              child: const Text('goto easyrefersh'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('ExampleHorizontal'),
-              child: const Text('goto ExampleHorizontal'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('indexedstack_demo'),
-              child: const Text('indexedstack_demo'),
-            ),
-            ElevatedButton(
-              onPressed: () => Get.toNamed('PageViewDemo'),
-              child: const Text('PageViewDemo'),
-            ),
-            ElevatedButton(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Consumer<MainStoreProvider>(
+                builder: (context, value, child) {
+                  print('main consumer build');
+                  return Text(
+                    '===${value.count}',
+                    style: Theme.of(context).textTheme.headline4,
+                  );
+                },
+              ),
+              ElevatedButton(
+                child: Text('button_text'.tr),
+                onPressed: () {
+                  print(Get.locale);
+                  print(Get.deviceLocale);
+                  print(Get.locale!.languageCode);
+                  print(Get.fallbackLocale);
+                  var languageCode = Get.locale!.languageCode;
+                  if (languageCode == 'zh') {
+                    Get.updateLocale(Locale('en'));
+                  } else {
+                    Get.updateLocale(Locale('zh'));
+                  }
+                },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('second'),
+                child: const Text('goto SecondPage'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('fourth'),
+                child: const Text('goto fourth'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('overlay'),
+                child: const Text('goto overlay'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('OverLayPage'),
+                child: const Text('goto overlay2'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('target'),
+                child: const Text('goto target'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('easyrefersh_demo'),
+                child: const Text('goto easyrefresh demo'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed('lzystackdemo');
+                },
+                child: const Text('lzystackdemo'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('catalog'),
+                child: const Text('goto catalog'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('easyrefersh'),
+                child: const Text('goto easyrefersh'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('ExampleHorizontal'),
+                child: const Text('goto ExampleHorizontal'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('indexedstack_demo'),
+                child: const Text('indexedstack_demo'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('PageViewDemo'),
+                child: const Text('PageViewDemo'),
+              ),
+              ElevatedButton(
                 onPressed: () {
                   // popup a toast.
                   // toast('Hello world!');
@@ -200,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   // We create the tooltip on the first use
                   var tooltip = SuperTooltip(
                     popupDirection: TooltipDirection.down,
-                    content: new Material(
+                    content: const Material(
                         child: Text(
                       "Lorem ipsum dolor sit amet, consetetur sadipscingelitr, "
                       "sed diam nonumy eirmod tempor invidunt ut laboreet dolore magna aliquyam erat, "
@@ -211,10 +218,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   tooltip.show(context);
                 },
-                child: const Text('tooltip')),
-            SecondPage(),
-            ThirdPage(),
-          ],
+                child: const Text('tooltip'),
+              ),
+              SecondPage(),
+              ThirdPage(),
+            ],
+          ),
         ),
         // floatingActionButton: Column(
         //   mainAxisAlignment: MainAxisAlignment.end,

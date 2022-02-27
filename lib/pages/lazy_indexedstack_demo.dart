@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:getxdemo/components/lazy_indexedstack.dart';
+import 'package:getxdemo/pages/indexedstack_demo.dart';
 
-class IndexedStackDemo extends StatefulWidget {
-  const IndexedStackDemo({Key? key}) : super(key: key);
+class LazyIndexedStackDemo extends StatefulWidget {
+  const LazyIndexedStackDemo({Key? key}) : super(key: key);
 
   @override
-  _IndexedStackDemoState createState() => _IndexedStackDemoState();
+  _LazyIndexedStackDemoState createState() => _LazyIndexedStackDemoState();
 }
 
-class _IndexedStackDemoState extends State<IndexedStackDemo> {
+class _LazyIndexedStackDemoState extends State<LazyIndexedStackDemo> {
   late int _currentIndex;
   late List<Widget> pages;
+
   @override
   void initState() {
     _currentIndex = 0;
@@ -34,13 +37,13 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('indexedstack_demo'),
+        title: const Text('LazyIndexedStackDemo'),
       ),
       body: Column(
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: IndexedStack(
+            child: LazyLoadIndexedStack(
               index: _currentIndex,
               sizing: StackFit.expand,
               children: pages,
@@ -93,29 +96,6 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
           )
         ],
       ),
-    );
-  }
-}
-
-class IndexedStackPage extends StatefulWidget {
-  final String title;
-  final Color color;
-  const IndexedStackPage({
-    Key? key,
-    required this.title,
-    required this.color,
-  }) : super(key: key);
-
-  @override
-  _IndexedStackPageState createState() => _IndexedStackPageState();
-}
-
-class _IndexedStackPageState extends State<IndexedStackPage> {
-  @override
-  Widget build(BuildContext context) {
-    print('build page ${widget.title}');
-    return Container(
-      color: widget.color,
     );
   }
 }
