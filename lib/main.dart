@@ -6,6 +6,7 @@ import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
+import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
 import 'package:getxdemo/screens/easyrefhres_demo.dart';
@@ -51,58 +52,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           initialRoute: '/home',
-          getPages: [
-            //Simple GetPage
-            GetPage(
-                name: '/home',
-                page: () => const MyHomePage(title: 'Flutter Demo Home Page')),
-            // GetPage with custom transitions and bindings
-            GetPage(
-              name: '/second',
-              page: () => const SecondPage(),
-              // customTransition: SizeTransitions(),
-              // binding: SampleBind(),
-            ),
-            // GetPage with default transitions
-            GetPage(
-              name: '/fourth',
-              transition: Transition.cupertino,
-              page: () => HomeWidget(),
-            ),
-            GetPage(
-              name: '/overlay',
-              transition: Transition.cupertino,
-              page: () => const Example1(),
-            ),
-            GetPage(
-              name: '/target',
-              page: () => const TargetWidget(),
-            ),
-            GetPage(
-              name: '/catalog',
-              page: () => const MyCatalog(),
-            ),
-            GetPage(
-              name: '/cart',
-              page: () => const MyCart(),
-            ),
-            GetPage(
-              name: '/OverLayPage',
-              page: () => OverLayPage(),
-            ),
-            GetPage(
-              name: '/easyrefersh',
-              page: () => const EasyRefreshPage(),
-            ),
-            GetPage(
-              name: '/easyrefersh_demo',
-              page: () => const EasyRefreshDemo(),
-            ),
-            GetPage(
-              name: '/ExampleHorizontal',
-              page: () => ExampleHorizontal(),
-            ),
-          ],
+          getPages: DemoRoute.routes,
           theme: ThemeData(
             // This is the theme of your application.
             //
@@ -228,6 +178,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () => Get.toNamed('ExampleHorizontal'),
               child: const Text('goto ExampleHorizontal'),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.toNamed('indexedstack_demo'),
+              child: const Text('indexedstack_demo'),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.toNamed('PageViewDemo'),
+              child: const Text('PageViewDemo'),
             ),
             ElevatedButton(
                 onPressed: () {
