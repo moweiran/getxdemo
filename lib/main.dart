@@ -5,6 +5,7 @@ import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
+import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
 import 'package:getxdemo/screens/easyrefresh.dart';
@@ -91,6 +92,10 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: '/easyrefersh',
               page: () => EasyRefreshPage(),
+            ),
+            GetPage(
+              name: '/ExampleHorizontal',
+              page: () => ExampleHorizontal(),
             ),
           ],
           theme: ThemeData(
@@ -210,6 +215,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () => Get.toNamed('easyrefersh'),
               child: const Text('goto easyrefersh'),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.toNamed('ExampleHorizontal'),
+              child: const Text('goto ExampleHorizontal'),
             ),
             ElevatedButton(
                 onPressed: () {
