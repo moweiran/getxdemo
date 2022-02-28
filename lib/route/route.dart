@@ -5,7 +5,9 @@ import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
 import 'package:getxdemo/pages/indexedstack_demo.dart';
 import 'package:getxdemo/pages/lazy_indexedstack_demo.dart';
+import 'package:getxdemo/pages/nestedscrollview_demo.dart';
 import 'package:getxdemo/pages/pageview_demo.dart';
+import 'package:getxdemo/pages/pull_to_refresh_outer.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
@@ -17,6 +19,11 @@ import 'package:getxdemo/sencond.dart';
 class DemoRoute {
   static List<GetPage> get routes => [
         //Simple GetPage
+
+        GetPage(
+          name: '/extend_nestedscrollview',
+          page: () => const PullToRefreshOuterDemo(),
+        ),
         GetPage(
             name: '/home',
             page: () => const MyHomePage(title: 'Flutter Demo Home Page')),
@@ -78,5 +85,9 @@ class DemoRoute {
           name: '/lzystackdemo',
           page: () => const LazyIndexedStackDemo(),
         ),
+        GetPage(
+          name: '/NestedScrollViewDemo',
+          page: () => const NestedScrollViewDemo(),
+        )
       ];
 }

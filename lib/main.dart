@@ -145,6 +145,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
+                onPressed: () => Get.toNamed('extend_nestedscrollview'),
+                child: const Text('PullToRefreshOuterDemo'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('NestedScrollViewDemo'),
+                child: const Text('NestedScrollViewDemo'),
+              ),
+              ElevatedButton(
                 onPressed: () => Get.toNamed('second'),
                 child: const Text('goto SecondPage'),
               ),
