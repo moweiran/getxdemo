@@ -3,11 +3,13 @@ import 'package:getxdemo/TargetWidget.dart';
 import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
-import 'package:getxdemo/pages/indexedstack_demo.dart';
-import 'package:getxdemo/pages/lazy_indexedstack_demo.dart';
-import 'package:getxdemo/pages/nestedscrollview_demo.dart';
+import 'package:getxdemo/pages/nested_scrollview/load_more.dart';
+import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_load_more.dart';
+import 'package:getxdemo/pages/stack/indexedstack_demo.dart';
+import 'package:getxdemo/pages/stack/lazy_indexedstack_demo.dart';
+import 'package:getxdemo/pages/nested_scrollview/nestedscrollview_demo.dart';
 import 'package:getxdemo/pages/pageview_demo.dart';
-import 'package:getxdemo/pages/pull_to_refresh_outer.dart';
+import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_outer.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
@@ -23,6 +25,14 @@ class DemoRoute {
         GetPage(
           name: '/extend_nestedscrollview',
           page: () => const PullToRefreshOuterDemo(),
+        ),
+        GetPage(
+          name: '/load_more',
+          page: () => const LoadMoreDemo(),
+        ),
+        GetPage(
+          name: '/pull_refresh_load_more',
+          page: () => const PullToRefreshLoadMoreDemo(),
         ),
         GetPage(
             name: '/home',

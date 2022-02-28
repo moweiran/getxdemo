@@ -149,6 +149,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('PullToRefreshOuterDemo'),
               ),
               ElevatedButton(
+                onPressed: () => Get.toNamed('load_more'),
+                child: const Text('load_more'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('pull_refresh_load_more'),
+                child: const Text('pull_refresh_load_more'),
+              ),
+              ElevatedButton(
                 onPressed: () => Get.toNamed('NestedScrollViewDemo'),
                 child: const Text('NestedScrollViewDemo'),
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getxdemo/components/lazy_indexedstack.dart';
-import 'package:getxdemo/pages/indexedstack_demo.dart';
+import 'package:getxdemo/pages/stack/indexedstack_demo.dart';
 
 class LazyIndexedStackDemo extends StatefulWidget {
   const LazyIndexedStackDemo({Key? key}) : super(key: key);
