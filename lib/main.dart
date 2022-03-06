@@ -145,6 +145,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
+                onPressed: () => Get.toNamed('RefreshIndicatorDemo'),
+                child: const Text('RefreshIndicatorDemo'),
+              ),
+              ElevatedButton(
                 onPressed: () => Get.toNamed('extend_nestedscrollview'),
                 child: const Text('PullToRefreshOuterDemo'),
               ),

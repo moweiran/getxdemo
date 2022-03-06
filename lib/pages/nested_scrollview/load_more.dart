@@ -47,16 +47,18 @@ class _LoadMoreDemoState extends State<LoadMoreDemo>
       headerSliverBuilder: (BuildContext c, bool f) {
         return <Widget>[
           SliverAppBar(
-              pinned: true,
-              expandedHeight: 200.0,
-              title: const Text('load more list'),
-              flexibleSpace: FlexibleSpaceBar(
-                  //centerTitle: true,
-                  collapseMode: CollapseMode.pin,
-                  background: Image.asset(
-                    'assets/467141054.jpg',
-                    fit: BoxFit.fill,
-                  )))
+            pinned: true,
+            expandedHeight: 200.0,
+            title: const Text('load more list'),
+            flexibleSpace: FlexibleSpaceBar(
+              //centerTitle: true,
+              collapseMode: CollapseMode.pin,
+              background: Image.asset(
+                'assets/467141054.jpg',
+                fit: BoxFit.fill,
+              ),
+            ),
+          )
         ];
       },
       //1.[pinned sliver header issue](https://github.com/flutter/flutter/issues/22393)

@@ -5,6 +5,7 @@ import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
 import 'package:getxdemo/pages/nested_scrollview/load_more.dart';
 import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_load_more.dart';
+import 'package:getxdemo/pages/refresh/refresh_indicator.dart';
 import 'package:getxdemo/pages/stack/indexedstack_demo.dart';
 import 'package:getxdemo/pages/stack/lazy_indexedstack_demo.dart';
 import 'package:getxdemo/pages/nested_scrollview/nestedscrollview_demo.dart';
@@ -25,6 +26,10 @@ class DemoRoute {
         GetPage(
           name: '/extend_nestedscrollview',
           page: () => const PullToRefreshOuterDemo(),
+        ),
+        GetPage(
+          name: '/RefreshIndicatorDemo',
+          page: () => const RefreshIndicatorDemo(),
         ),
         GetPage(
           name: '/load_more',
