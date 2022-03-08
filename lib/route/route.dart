@@ -3,6 +3,7 @@ import 'package:getxdemo/TargetWidget.dart';
 import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
+import 'package:getxdemo/pages/animotion/animotion.dart';
 import 'package:getxdemo/pages/nested_scrollview/load_more.dart';
 import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_load_more.dart';
 import 'package:getxdemo/pages/refresh/refresh_indicator.dart';
@@ -22,7 +23,10 @@ import 'package:getxdemo/sencond.dart';
 class DemoRoute {
   static List<GetPage> get routes => [
         //Simple GetPage
-
+        GetPage(
+          name: '/animotion',
+          page: () => const AnimotionDemoPage(),
+        ),
         GetPage(
           name: '/extend_nestedscrollview',
           page: () => const PullToRefreshOuterDemo(),

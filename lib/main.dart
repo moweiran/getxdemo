@@ -5,6 +5,7 @@ import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
+import 'package:getxdemo/pages/animotion/animotion.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/screens/cart.dart';
@@ -132,10 +133,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ElevatedButton(
                 child: Text('button_text'.tr),
                 onPressed: () {
-                  print(Get.locale);
-                  print(Get.deviceLocale);
-                  print(Get.locale!.languageCode);
-                  print(Get.fallbackLocale);
                   var languageCode = Get.locale!.languageCode;
                   if (languageCode == 'zh') {
                     Get.updateLocale(Locale('en'));
@@ -143,6 +140,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const AnimotionDemoPage()),
+                child: const Text('AnimotionDemoPage'),
               ),
               ElevatedButton(
                 onPressed: () => Get.toNamed('RefreshIndicatorDemo'),
