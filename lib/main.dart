@@ -5,6 +5,7 @@ import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
+import 'package:getxdemo/pages/animotion/animotion.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/screens/cart.dart';
@@ -120,10 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ElevatedButton(
                 child: Text('button_text'.tr),
                 onPressed: () {
-                  print(Get.locale);
-                  print(Get.deviceLocale);
-                  print(Get.locale!.languageCode);
-                  print(Get.fallbackLocale);
                   var languageCode = Get.locale!.languageCode;
                   if (languageCode == 'zh') {
                     Get.updateLocale(Locale('en'));
@@ -131,6 +128,30 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const AnimotionDemoPage()),
+                child: const Text('AnimotionDemoPage'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('RefreshIndicatorDemo'),
+                child: const Text('RefreshIndicatorDemo'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('extend_nestedscrollview'),
+                child: const Text('PullToRefreshOuterDemo'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('load_more'),
+                child: const Text('load_more'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('pull_refresh_load_more'),
+                child: const Text('pull_refresh_load_more'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.toNamed('NestedScrollViewDemo'),
+                child: const Text('NestedScrollViewDemo'),
               ),
               ElevatedButton(
                 onPressed: () => Get.toNamed('second'),

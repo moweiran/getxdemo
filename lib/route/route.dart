@@ -3,10 +3,16 @@ import 'package:getxdemo/TargetWidget.dart';
 import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
-import 'package:getxdemo/pages/indexedstack_demo.dart';
-import 'package:getxdemo/pages/lazy_indexedstack_demo.dart';
+import 'package:getxdemo/pages/animotion/animotion.dart';
+import 'package:getxdemo/pages/nested_scrollview/load_more.dart';
+import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_load_more.dart';
+import 'package:getxdemo/pages/refresh/refresh_indicator.dart';
+import 'package:getxdemo/pages/stack/indexedstack_demo.dart';
+import 'package:getxdemo/pages/stack/lazy_indexedstack_demo.dart';
+import 'package:getxdemo/pages/nested_scrollview/nestedscrollview_demo.dart';
 import 'package:getxdemo/pages/pageview_demo.dart';
 import 'package:getxdemo/pages/sliver_indexedstack_demo.dart';
+import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_outer.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
@@ -18,6 +24,26 @@ import 'package:getxdemo/sencond.dart';
 class DemoRoute {
   static List<GetPage> get routes => [
         //Simple GetPage
+        GetPage(
+          name: '/animotion',
+          page: () => const AnimotionDemoPage(),
+        ),
+        GetPage(
+          name: '/extend_nestedscrollview',
+          page: () => const PullToRefreshOuterDemo(),
+        ),
+        GetPage(
+          name: '/RefreshIndicatorDemo',
+          page: () => const RefreshIndicatorDemo(),
+        ),
+        GetPage(
+          name: '/load_more',
+          page: () => const LoadMoreDemo(),
+        ),
+        GetPage(
+          name: '/pull_refresh_load_more',
+          page: () => const PullToRefreshLoadMoreDemo(),
+        ),
         GetPage(
             name: '/home',
             page: () => const MyHomePage(title: 'Flutter Demo Home Page')),
@@ -83,5 +109,9 @@ class DemoRoute {
           name: '/SliverIndexedStackDemo',
           page: () => const SliverIndexedStackDemo(),
         ),
+        GetPage(
+          name: '/NestedScrollViewDemo',
+          page: () => const NestedScrollViewDemo(),
+        )
       ];
 }
