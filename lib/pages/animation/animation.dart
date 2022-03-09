@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 
-class AnimotionDemoPage extends StatefulWidget {
-  const AnimotionDemoPage({Key? key}) : super(key: key);
+class AnimationDemoPage extends StatefulWidget {
+  const AnimationDemoPage({Key? key}) : super(key: key);
 
   @override
-  State<AnimotionDemoPage> createState() => _AnimotionDemoPageState();
+  State<AnimationDemoPage> createState() => _AnimationDemoPageState();
 }
 
-class _AnimotionDemoPageState extends State<AnimotionDemoPage> {
+class _AnimationDemoPageState extends State<AnimationDemoPage> {
   double height = 100;
   double width = 100;
   int value = 0;

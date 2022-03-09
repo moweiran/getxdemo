@@ -5,7 +5,8 @@ import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
-import 'package:getxdemo/pages/animotion/animotion.dart';
+import 'package:getxdemo/pages/animation/animation.dart';
+import 'package:getxdemo/pages/animation/animation_controller.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/screens/cart.dart';
@@ -130,7 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                onPressed: () => Get.to(() => const AnimotionDemoPage()),
+                onPressed: () => Get.to(() => const AnimationControllerDemo()),
+                child: const Text('AnimationControllerDemo'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const AnimationDemoPage()),
                 child: const Text('AnimotionDemoPage'),
               ),
               ElevatedButton(
