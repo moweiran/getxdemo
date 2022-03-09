@@ -6,6 +6,7 @@ import 'package:getxdemo/main.dart';
 import 'package:getxdemo/pages/indexedstack_demo.dart';
 import 'package:getxdemo/pages/lazy_indexedstack_demo.dart';
 import 'package:getxdemo/pages/pageview_demo.dart';
+import 'package:getxdemo/pages/sliver_indexedstack_demo.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/screens/cart.dart';
 import 'package:getxdemo/screens/catalog.dart';
@@ -77,6 +78,10 @@ class DemoRoute {
         GetPage(
           name: '/lzystackdemo',
           page: () => const LazyIndexedStackDemo(),
+        ),
+        GetPage(
+          name: '/SliverIndexedStackDemo',
+          page: () => const SliverIndexedStackDemo(),
         ),
       ];
 }

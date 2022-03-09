@@ -98,28 +98,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('main build=====');
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return ChangeNotifierProvider.value(
       value: store,
       child: Scaffold(
         appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
           title: Text("title".trArgs(['John'])),
         ),
         body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
               Consumer<MainStoreProvider>(
                 builder: (context, value, child) {
                   print('main consumer build');
@@ -195,6 +183,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('PageViewDemo'),
               ),
               ElevatedButton(
+                onPressed: () => Get.toNamed('SliverIndexedStackDemo'),
+                child: const Text('SliverIndexedStackDemo'),
+              ),
+              ElevatedButton(
                 onPressed: () {
                   // popup a toast.
                   // toast('Hello world!');
@@ -220,8 +212,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('tooltip'),
               ),
-              SecondPage(),
-              ThirdPage(),
+              const SecondPage(),
+              const ThirdPage(),
             ],
           ),
         ),

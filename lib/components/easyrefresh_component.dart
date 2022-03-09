@@ -6,6 +6,12 @@ class EasyRefreshComponent extends StatelessWidget {
   final Function loadData;
   final Function? refreshData;
 
+  /// Footer
+  final Footer? footer;
+
+  /// Header
+  final Header? header;
+
   /// Slivers集合
   final List<Widget> slivers;
 
@@ -14,6 +20,8 @@ class EasyRefreshComponent extends StatelessWidget {
     required this.loadData,
     this.refreshData,
     required this.slivers,
+    this.header,
+    this.footer,
   }) : super(key: key);
 
   @override
@@ -57,6 +65,12 @@ class _BuildEasyRefresh extends StatefulWidget {
   final Function loadData;
   final Function? refreshData;
 
+  /// Footer
+  final Footer? footer;
+
+  /// Header
+  final Header? header;
+
   /// Slivers集合
   final List<Widget>? slivers;
 
@@ -65,6 +79,8 @@ class _BuildEasyRefresh extends StatefulWidget {
     required this.loadData,
     this.refreshData,
     this.slivers,
+    this.header,
+    this.footer,
   }) : super(key: key);
 
   @override
@@ -86,8 +102,8 @@ class _BuildEasyRefreshState extends State<_BuildEasyRefresh> {
       enableControlFinishRefresh: false,
       enableControlFinishLoad: true,
       controller: _controller,
-      header: ClassicalHeader(),
-      footer: ClassicalFooter(),
+      header: widget.header ?? ClassicalHeader(),
+      footer: widget.footer ?? ClassicalFooter(),
       onRefresh: () async {
         print('refresh');
         await widget.refreshData!.call();
