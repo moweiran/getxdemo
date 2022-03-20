@@ -4,6 +4,9 @@ import 'package:getxdemo/example.dart';
 import 'package:getxdemo/fourth.dart';
 import 'package:getxdemo/main.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
+import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
+import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
+import 'package:getxdemo/pages/easyloading/easyloading_page2.dart';
 import 'package:getxdemo/pages/nested_scrollview/load_more.dart';
 import 'package:getxdemo/pages/nested_scrollview/pull_to_refresh_load_more.dart';
 import 'package:getxdemo/pages/refresh/refresh_indicator.dart';
@@ -24,6 +27,10 @@ import 'package:getxdemo/sencond.dart';
 class DemoRoute {
   static List<GetPage> get routes => [
         //Simple GetPage
+        GetPage(name: '/easyloading', page: () => const EasyLoadingDemo()),
+        GetPage(
+            name: '/easyloadingpage1', page: () => const EasyLoadingPage1()),
+        GetPage(name: '/easyloading2', page: () => const EasyLoadingPage2()),
         GetPage(
           name: '/animotion',
           page: () => const AnimationDemoPage(),

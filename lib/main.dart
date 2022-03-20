@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:getxdemo/TargetWidget.dart';
 import 'package:getxdemo/example.dart';
@@ -7,6 +8,8 @@ import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
+import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
+import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
 import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/screens/cart.dart';
@@ -65,12 +68,16 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.blue,
+
+            highlightColor: Colors.transparent,
+            brightness: Brightness.light,
+            primarySwatch: Colors.purple,
           ),
           defaultTransition: Transition.native,
           translations: MyTranslations(),
           locale: const Locale('en'),
           //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          builder: EasyLoading.init(),
         ),
       ),
     );
@@ -129,6 +136,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const EasyLoadingDemo()),
+                child: const Text('easyloading'),
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const EasyLoadingPage1()),
+                child: const Text('easyloadingpage1'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const AnimationControllerDemo()),
