@@ -134,6 +134,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.13.1"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.2.5"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.6.1"
+  firebase_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_messaging
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "11.2.11"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.2.1"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.2.9"
   flustars:
     dependency: "direct main"
     description:
@@ -146,6 +188,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_custom_dialog:
+    dependency: "direct main"
+    description:
+      name: flutter_custom_dialog
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
+  flutter_easyloading:
+    dependency: "direct main"
+    description:
+      path: flutter_easyloading
+      relative: true
+    source: path
+    version: "3.0.3"
   flutter_easyrefresh:
     dependency: "direct main"
     description:
@@ -160,6 +216,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_spinkit:
+    dependency: transitive
+    description:
+      name: flutter_spinkit
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.1.0"
   flutter_swiper_null_safety:
     dependency: "direct main"
     description:
