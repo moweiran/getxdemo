@@ -20,6 +20,8 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
+import 'extend_wrap/extend_wrap_demo.dart';
+
 /// Define a top-level named handler which background/terminated messages will
 /// call.
 ///
@@ -219,6 +221,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () =>
+                    Get.to(() => const ExtendWrapPage(title: 'ExtendWrapPage')),
+                child: const Text('ExtendWrapPage'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const StackPositionedDemo()),
