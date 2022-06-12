@@ -21,7 +21,11 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
+<<<<<<< HEAD
 import 'pages/wrap_demo/wrap_demo.dart';
+=======
+import 'extend_wrap/extend_wrap_demo.dart';
+>>>>>>> b4597cd54248c265e8ff2cd21586483763fc292f
 
 /// Define a top-level named handler which background/terminated messages will
 /// call.
@@ -224,8 +228,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
+<<<<<<< HEAD
                 onPressed: () => Get.to(() => const WrapDemoPage()),
                 child: const Text('WrapDemoPage'),
+=======
+                onPressed: () =>
+                    Get.to(() => const ExtendWrapPage(title: 'ExtendWrapPage')),
+                child: const Text('ExtendWrapPage'),
+>>>>>>> b4597cd54248c265e8ff2cd21586483763fc292f
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const StackPositionedDemo()),
