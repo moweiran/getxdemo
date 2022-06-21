@@ -50,8 +50,6 @@ dependencies:
     git:
       url: git@github.com:moweiran/flutter_easyloading.git
   flutter_custom_dialog: ^1.2.0
-  firebase_messaging: ^11.2.11
-  firebase_core: ^1.13.1
   extended_wrap: ^0.1.0
 dev_dependencies:
   flutter_test:
