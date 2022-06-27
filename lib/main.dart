@@ -6,6 +6,7 @@ import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
 import 'package:getxdemo/pages/custom_painter/custom_painter_demo.dart';
+import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
@@ -138,6 +139,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const InheritedWidgetTestDemo()),
+                child: const Text('InheritedWidgetTestDemo'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const CustomPainterDemo()),
