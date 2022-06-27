@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
+import 'pages/custom_painters/custom_painter_demo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -137,6 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const CustomPainterDemo()),
+                child: const Text('CustomPainterDemo'),
               ),
               ElevatedButton(
                 onPressed: () =>
@@ -269,6 +274,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SecondPage(),
               const ThirdPage(),
+              Container(
+                child: RichText(
+                  maxLines: 2,
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: Chip(
+                          label: Text('123123'),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
