@@ -20,6 +20,7 @@ import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
+import 'pages/readmore/readmore_demo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -122,7 +123,6 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Consumer<MainStoreProvider>(
                 builder: (context, value, child) {
-                  print('main consumer build');
                   return Text(
                     '===${value.count}',
                     style: Theme.of(context).textTheme.headline4,
@@ -134,11 +134,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   var languageCode = Get.locale!.languageCode;
                   if (languageCode == 'zh') {
-                    Get.updateLocale(Locale('en'));
+                    Get.updateLocale(const Locale('en'));
                   } else {
-                    Get.updateLocale(Locale('zh'));
+                    Get.updateLocale(const Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const ReadmoreDemoPage()),
+                child: const Text('ReadmoreDemoPage'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const InheritedWidgetTestDemo()),
@@ -282,10 +286,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 child: RichText(
                   maxLines: 2,
-                  text: TextSpan(
+                  text: const TextSpan(
                     children: [
                       WidgetSpan(
-                        child: Chip(
+                        child: const Chip(
                           label: Text('123123'),
                         ),
                       )

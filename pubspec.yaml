@@ -51,6 +51,9 @@ dependencies:
       url: git@github.com:moweiran/flutter_easyloading.git
   flutter_custom_dialog: ^1.2.0
   extended_wrap: ^0.1.0
+  readmore: ^2.2.0
+  expandable: ^5.0.1
+  hashtagable: ^2.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
