@@ -20,6 +20,9 @@ import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
+import 'pages/inherited_notifier/inherited_notifier_demo.dart';
+import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
+import 'pages/inherited_notifier/slider_info.dart';
 import 'pages/readmore/readmore_demo.dart';
 
 void main() async {
@@ -104,6 +107,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   MainStoreProvider store = MainStoreProvider();
 
+  SliderInfo sliderInfo = SliderInfo();
   @override
   void initState() {
     super.initState();
@@ -128,6 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: Theme.of(context).textTheme.headline4,
                   );
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(
+                    () => InheritedNotifierSecondPage(sliderInfo: sliderInfo)),
+                child: const Text('InheritedNotifierSecondPage'),
               ),
               ElevatedButton(
                 child: Text('button_text'.tr),
