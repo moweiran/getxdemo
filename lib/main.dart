@@ -14,12 +14,14 @@ import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/sencond.dart';
 import 'package:getxdemo/store/main_store.dart';
 import 'package:getxdemo/third.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
+import 'pages/graphql_example/graphql_example_page.dart';
 import 'pages/inherited_notifier/inherited_notifier_demo.dart';
 import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
 import 'pages/inherited_notifier/slider_info.dart';
@@ -27,6 +29,9 @@ import 'pages/readmore/readmore_demo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // We're using HiveStore for persistence,
+  // so we need to initialize Hive.
+  await initHiveForFlutter();
   runApp(const MyApp());
 }
 
@@ -36,50 +41,74 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Using MultiProvider is convenient when providing multiple objects.
-    return MultiProvider(
-      providers: [
-        // In this sample app, CatalogModel never changes, so a simple Provider
-        // is sufficient.
-        Provider(create: (context) => CatalogModel()),
-        // CartModel is implemented as a ChangeNotifier, which calls for the use
-        // of ChangeNotifierProvider. Moreover, CartModel depends
-        // on CatalogModel, so a ProxyProvider is needed.
-        ChangeNotifierProxyProvider<CatalogModel, CartModel>(
-          create: (context) => CartModel(),
-          update: (context, catalog, cart) {
-            if (cart == null) throw ArgumentError.notNull('cart');
-            cart.catalog = catalog;
-            return cart;
-          },
-        ),
-      ],
-      child: OverlaySupport.global(
-        child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          initialRoute: '/home',
-          getPages: DemoRoute.routes,
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or simply save your changes to "hot reload" in a Flutter IDE).
-            // Notice that the counter didn't reset back to zero; the application
-            // is not restarted.
+    late final HttpLink httpLink = HttpLink(
+      // 'http://api.github.com/graphql',
+      'http://localhost:4000/',
+    );
 
-            highlightColor: Colors.transparent,
-            brightness: Brightness.light,
-            primarySwatch: Colors.purple,
+    // late final AuthLink authLink = AuthLink(
+    // getToken: () async => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
+    // OR
+    // getToken: () => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
+    // );
+
+    // late final Link link = authLink.concat(httpLink);
+    late final ValueNotifier<GraphQLClient> client = ValueNotifier(
+      GraphQLClient(
+        link: httpLink,
+        // The default store is the InMemoryStore, which does NOT persist to disk
+        cache: GraphQLCache(
+          store: HiveStore(),
+        ),
+      ),
+    );
+    // Using MultiProvider is convenient when providing multiple objects.
+    return GraphQLProvider(
+      client: client,
+      child: MultiProvider(
+        providers: [
+          // In this sample app, CatalogModel never changes, so a simple Provider
+          // is sufficient.
+          Provider(create: (context) => CatalogModel()),
+          // CartModel is implemented as a ChangeNotifier, which calls for the use
+          // of ChangeNotifierProvider. Moreover, CartModel depends
+          // on CatalogModel, so a ProxyProvider is needed.
+          ChangeNotifierProxyProvider<CatalogModel, CartModel>(
+            create: (context) => CartModel(),
+            update: (context, catalog, cart) {
+              if (cart == null) throw ArgumentError.notNull('cart');
+              cart.catalog = catalog;
+              return cart;
+            },
           ),
-          defaultTransition: Transition.native,
-          translations: MyTranslations(),
-          locale: const Locale('en'),
-          //home: const MyHomePage(title: 'Flutter Demo Home Page'),
-          builder: EasyLoading.init(),
+        ],
+        child: OverlaySupport.global(
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            initialRoute: '/home',
+            getPages: DemoRoute.routes,
+            theme: ThemeData(
+              // This is the theme of your application.
+              //
+              // Try running your application with "flutter run". You'll see the
+              // application has a blue toolbar. Then, without quitting the app, try
+              // changing the primarySwatch below to Colors.green and then invoke
+              // "hot reload" (press "r" in the console where you ran "flutter run",
+              // or simply save your changes to "hot reload" in a Flutter IDE).
+              // Notice that the counter didn't reset back to zero; the application
+              // is not restarted.
+
+              highlightColor: Colors.transparent,
+              brightness: Brightness.light,
+              primarySwatch: Colors.purple,
+            ),
+            defaultTransition: Transition.native,
+            translations: MyTranslations(),
+            locale: const Locale('en'),
+            //home: const MyHomePage(title: 'Flutter Demo Home Page'),
+            builder: EasyLoading.init(),
+          ),
         ),
       ),
     );
@@ -132,6 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: Theme.of(context).textTheme.headline4,
                   );
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const GraphqlExamplePage()),
+                child: const Text('GraphqlExamplePage'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(

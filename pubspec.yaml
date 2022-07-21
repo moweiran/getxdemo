@@ -54,6 +54,8 @@ dependencies:
   readmore: ^2.2.0
   expandable: ^5.0.1
   hashtagable: ^2.1.0
+  graphql_flutter: ^5.1.0
+  flutter_hooks: ^0.18.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
