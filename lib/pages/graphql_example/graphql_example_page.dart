@@ -102,7 +102,7 @@ class _GraphqlExamplePageState extends State<GraphqlExamplePage> {
         document: gql(addStar), // this is the mutation string you just created
         // you can update the cache based on results
         // update: (GraphQLDataProxy cache, QueryResult result) {
-        //   return cache;
+        //   // return cache;
         // },
         // or do something with the result.data on completion
         onCompleted: (dynamic resultData) {
@@ -112,7 +112,8 @@ class _GraphqlExamplePageState extends State<GraphqlExamplePage> {
     );
     final queryResult = useQuery(
       QueryOptions(
-        cacheRereadPolicy: CacheRereadPolicy.mergeOptimistic,
+        // cacheRereadPolicy: CacheRereadPolicy.mergeOptimistic,
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
         document: gql(readRepositories),
         variables: const {
           "keyword": "",
