@@ -116,25 +116,26 @@ class _ListItemPlayerState extends State<ListItemPlayer> {
       alignment: Alignment.center,
     );
     return SizedBox(
-        height: 200,
-        child: Column(
-          children: <Widget>[
-            Text("${widget.index}", style: const TextStyle(fontSize: 20)),
-            Expanded(
-              child: _player != null
-                  ? FijkView(
-                      player: _player!,
-                      fit: fit,
-                      cover: const AssetImage("assets/cover.png"),
-                    )
-                  : Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(color: Color(0xFF607D8B)),
-                      child: Image.asset("assets/cover.png"),
-                    ),
-            )
-          ],
-        ));
+      height: 200,
+      child: Column(
+        children: <Widget>[
+          Text("${widget.index}", style: const TextStyle(fontSize: 20)),
+          Expanded(
+            child: _player != null
+                ? FijkView(
+                    player: _player!,
+                    fit: fit,
+                    cover: const AssetImage("assets/cover.png"),
+                  )
+                : Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(color: Color(0xFF607D8B)),
+                    child: Image.asset("assets/cover.png"),
+                  ),
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -151,18 +152,19 @@ class _ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: FijkAppBar.defaultSetting(title: "List View"),
-        body: NotificationListener<ScrollNotification>(
-          onNotification: (ScrollNotification notification) {
-            notifier.value = notification.metrics.pixels;
-            return true;
+      appBar: FijkAppBar.defaultSetting(title: "List View"),
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification notification) {
+          notifier.value = notification.metrics.pixels;
+          return true;
+        },
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return ListItemPlayer(index: index, notifier: notifier);
           },
-          child: ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return ListItemPlayer(index: index, notifier: notifier);
-            },
-            cacheExtent: 1,
-          ),
-        ));
+          cacheExtent: 1,
+        ),
+      ),
+    );
   }
 }

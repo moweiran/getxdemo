@@ -24,6 +24,7 @@ import 'pages/graphql_example/graphql_example_page.dart';
 import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
 import 'pages/inherited_notifier/slider_info.dart';
 import 'pages/readmore/readmore_demo.dart';
+import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/youtube_player/youtube_player_demo.dart';
 
 void main() async {
@@ -115,6 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('${value.count}'),
           );
         },
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const ShimmerDemoPage()),
+        child: const Text('ShimmerDemoPage'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => HomeScreen()),
