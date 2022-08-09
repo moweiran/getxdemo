@@ -10,6 +10,7 @@ import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
+import 'package:getxdemo/pages/web_socket/web_socket_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/store/main_store.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -117,6 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('${value.count}'),
           );
         },
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const WebSocketDemoPage()),
+        child: const Text('WebSocketDemo'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const ShowModalBottomSheet()),
