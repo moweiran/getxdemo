@@ -20,6 +20,7 @@ import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
+import 'pages/emoji/emoji_demo.dart';
 import 'pages/fijkplayer/home_page.dart';
 import 'pages/graphql_example/graphql_example_page.dart';
 import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
@@ -27,6 +28,7 @@ import 'pages/inherited_notifier/slider_info.dart';
 import 'pages/readmore/readmore_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
+import 'pages/socket/socket_demo.dart';
 import 'pages/youtube_player/youtube_player_demo.dart';
 
 void main() async {
@@ -118,6 +120,14 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('${value.count}'),
           );
         },
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const EmojiDemoPage()),
+        child: const Text('EmojiDemoPage'),
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const SocketDemoPage()),
+        child: const Text('SocketDemoPage'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const WebSocketDemoPage()),

@@ -11,7 +11,8 @@ class WebSocketDemoPage extends StatefulWidget {
 class _WebSocketDemoPageState extends State<WebSocketDemoPage> {
   final TextEditingController _controller = TextEditingController();
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://echo.websocket.events'),
+    // Uri.parse('wss://echo.websocket.events'),
+    Uri.parse('wss://vama.hummingbirdstudio.live'),
   );
 
   @override
