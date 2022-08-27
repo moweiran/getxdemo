@@ -27,8 +27,9 @@ jobs:
       - name: Set up ruby env
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: 2.6.8p205
           bundler-cache: true
+          working-directory: android
       
       - name: Run tests
         run: bundle exec fastlane android test
