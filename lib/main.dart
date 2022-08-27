@@ -1,3 +1,4 @@
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -321,10 +322,10 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(15),
           itemCount: buttons.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, //Grid按两列显示
+            crossAxisCount: 1, //Grid按两列显示
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
-            childAspectRatio: 1,
+            childAspectRatio: 8,
           ),
           itemBuilder: (context, index) {
             return buttons[index];

@@ -48,7 +48,7 @@ dependencies:
   flustars: ^2.0.1
   flutter_easyloading: 
     git:
-      url: git@github.com:moweiran/flutter_easyloading.git
+      url: https://github.com/moweiran/flutter_easyloading.git
   flutter_custom_dialog: ^1.2.0
   extended_wrap: ^0.1.0
   readmore: ^2.2.0
