@@ -33,7 +33,7 @@ jobs:
       
       - name: Run tests
         run: bundle exec fastlane android test
-        working-directory: android
+        # working-directory: android
 
 
       - uses: subosito/flutter-action@v2
