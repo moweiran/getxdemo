@@ -308,8 +308,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('tooltip'),
               ),
-              const SecondPage(),
-              const ThirdPage(),
               Container(
                 child: RichText(
                   maxLines: 2,
