@@ -48,13 +48,20 @@ dependencies:
   flustars: ^2.0.1
   flutter_easyloading: 
     git:
-      url: git@github.com:moweiran/flutter_easyloading.git
+      url: https://github.com/moweiran/flutter_easyloading.git
   flutter_custom_dialog: ^1.2.0
   extended_wrap: ^0.1.0
-  flutter_list_view: ^1.1.18
-  flutter_html: ^2.2.1
+  readmore: ^2.2.0
+  expandable: ^5.0.1
+  hashtagable: ^2.1.0
+  graphql_flutter: ^5.1.0
+  flutter_hooks: ^0.18.3
+  youtube_player_flutter: ^8.0.0
+  fijkplayer: ^0.10.1
+  streaming_shared_preferences: ^2.0.0
   shimmer: ^2.0.0
-  flutter_aliplayer: ^5.4.2
+  web_socket_channel: ^2.2.0
+  socket_io_client: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -79,9 +86,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/1.png
-    - images/2.png
-    - images/3.png
+    - assets/images/1.png
+    - assets/images/2.png
+    - assets/images/3.png
+    - assets/cover.png
+    - assets/butterfly.mp4
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

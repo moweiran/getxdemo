@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getxdemo/sencond.dart';
 import 'package:getxdemo/store/main_store.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +40,6 @@ class _ThirdPageState extends State<ThirdPage> {
               return Text("third selector second count ${value}");
             },
           ),
-          SecondPage(),
           // Text("${Provider.of<MainStoreProvider>(context).count}"),
         ],
       ),

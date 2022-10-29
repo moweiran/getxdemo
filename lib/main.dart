@@ -1,5 +1,4 @@
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -7,111 +6,82 @@ import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
-import 'package:getxdemo/pages/list_view_demo/list_vide_demo_page.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
+import 'package:getxdemo/pages/web_socket/web_socket_demo.dart';
 import 'package:getxdemo/route/route.dart';
-import 'package:getxdemo/sencond.dart';
 import 'package:getxdemo/store/main_store.dart';
-import 'package:getxdemo/third.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
-
-/// Define a top-level named handler which background/terminated messages will
-/// call.
-///
-/// To verify things are working, check out the native platform logs.
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // If you're going to use other Firebase services in the background, such as Firestore,
-//   // make sure you call `initializeApp` before using other Firebase services.
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   print('Handling a background message ${message.messageId}');
-// }
-
-// /// Create a [AndroidNotificationChannel] for heads up notifications
-// // late AndroidNotificationChannel channel;
+import 'pages/emoji/emoji_demo.dart';
+import 'pages/fijkplayer/home_page.dart';
+import 'pages/graphql_example/graphql_example_page.dart';
+import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
+import 'pages/inherited_notifier/slider_info.dart';
+import 'pages/readmore/readmore_demo.dart';
+import 'pages/shimmer/shimmer_demo.dart';
+import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
+import 'pages/socket/socket_demo.dart';
+import 'pages/youtube_player/youtube_player_demo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // FirebaseApp firebaseApp = await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // // Set the background messaging handler early on, as a named top-level function
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  // channel = const AndroidNotificationChannel(
-  //     'high_importance_channel', // id
-  //     'High Importance Notifications', // title
-  //     'This channel is used for important notifications.', // description
-  //     importance: Importance.high,
-  //   );
-
-  /// Update the iOS foreground notification presentation options to allow
-  /// heads up notifications.
-  // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-  //   alert: true,
-  //   badge: true,
-  //   sound: true,
-  // );
-
+  await initHiveForFlutter();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // Using MultiProvider is convenient when providing multiple objects.
-    return MultiProvider(
-      providers: [
-        // In this sample app, CatalogModel never changes, so a simple Provider
-        // is sufficient.
-        Provider(create: (context) => CatalogModel()),
-        // CartModel is implemented as a ChangeNotifier, which calls for the use
-        // of ChangeNotifierProvider. Moreover, CartModel depends
-        // on CatalogModel, so a ProxyProvider is needed.
-        ChangeNotifierProxyProvider<CatalogModel, CartModel>(
-          create: (context) => CartModel(),
-          update: (context, catalog, cart) {
-            if (cart == null) throw ArgumentError.notNull('cart');
-            cart.catalog = catalog;
-            return cart;
-          },
+    late final HttpLink httpLink = HttpLink(
+      'http://localhost:4000/',
+    );
+    late final ValueNotifier<GraphQLClient> client = ValueNotifier(
+      GraphQLClient(
+        link: httpLink,
+        cache: GraphQLCache(
+          store: HiveStore(),
         ),
-      ],
-      child: OverlaySupport.global(
-        child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          initialRoute: '/home',
-          getPages: DemoRoute.routes,
-          theme: ThemeData(
-            // This is the theme of your application.
-            //
-            // Try running your application with "flutter run". You'll see the
-            // application has a blue toolbar. Then, without quitting the app, try
-            // changing the primarySwatch below to Colors.green and then invoke
-            // "hot reload" (press "r" in the console where you ran "flutter run",
-            // or simply save your changes to "hot reload" in a Flutter IDE).
-            // Notice that the counter didn't reset back to zero; the application
-            // is not restarted.
-
-            highlightColor: Colors.transparent,
-            brightness: Brightness.light,
-            primarySwatch: Colors.purple,
+      ),
+    );
+    return GraphQLProvider(
+      client: client,
+      child: MultiProvider(
+        providers: [
+          Provider(create: (context) => CatalogModel()),
+          ChangeNotifierProxyProvider<CatalogModel, CartModel>(
+            create: (context) => CartModel(),
+            update: (context, catalog, cart) {
+              if (cart == null) throw ArgumentError.notNull('cart');
+              cart.catalog = catalog;
+              return cart;
+            },
           ),
-          defaultTransition: Transition.native,
-          translations: MyTranslations(),
-          locale: const Locale('en'),
-          //home: const MyHomePage(title: 'Flutter Demo Home Page'),
-          builder: EasyLoading.init(),
+        ],
+        child: OverlaySupport.global(
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            initialRoute: '/home',
+            getPages: DemoRoute.routes,
+            theme: ThemeData(
+              highlightColor: Colors.transparent,
+              brightness: Brightness.light,
+              primarySwatch: Colors.purple,
+            ),
+            defaultTransition: Transition.native,
+            translations: MyTranslations(),
+            locale: const Locale('en'),
+            builder: EasyLoading.init(),
+          ),
         ),
       ),
     );
@@ -120,15 +90,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -139,17 +100,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   MainStoreProvider store = MainStoreProvider();
 
+  SliderInfo sliderInfo = SliderInfo();
+
+  List<Widget> buttons = [];
+
   @override
   void initState() {
     super.initState();
-    // FirebaseMessaging.instance
-    //     .getInitialMessage()
-    //     .then((RemoteMessage? message) {
-    //   if (message != null) {
-    //     print(message);
-    //   }
-    // });
-    // requestPremissions();
   }
 
   // requestPremissions() async {
@@ -221,10 +178,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
-              ),
-              ElevatedButton(
-                onPressed: () => Get.to(() => const ListViewDemoPage()),
-                child: const Text('ListViewDemoPage'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const CustomPainterDemo()),

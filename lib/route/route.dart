@@ -22,7 +22,6 @@ import 'package:getxdemo/screens/catalog.dart';
 import 'package:getxdemo/screens/easyrefhres_demo.dart';
 import 'package:getxdemo/screens/easyrefresh.dart';
 import 'package:getxdemo/screens/overlay_page.dart';
-import 'package:getxdemo/sencond.dart';
 
 import '../pages/list_view_demo/list_vide_demo_page.dart';
 
@@ -60,14 +59,7 @@ class DemoRoute {
         GetPage(
             name: '/home',
             page: () => const MyHomePage(title: 'Flutter Demo Home Page')),
-        // GetPage with custom transitions and bindings
-        GetPage(
-          name: '/second',
-          page: () => const SecondPage(),
-          // customTransition: SizeTransitions(),
-          // binding: SampleBind(),
-        ),
-        // GetPage with default transitions
+
         GetPage(
           name: '/fourth',
           transition: Transition.cupertino,

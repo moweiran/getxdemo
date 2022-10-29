@@ -4,9 +4,9 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 class ExampleHorizontal extends StatelessWidget {
   const ExampleHorizontal({Key? key}) : super(key: key);
   static List<String> images = [
-    "images/1.png",
-    "images/2.png",
-    "images/3.png",
+    "assets/images/1.png",
+    "assets/images/2.png",
+    "assets/images/3.png",
   ];
   @override
   Widget build(BuildContext context) {
