@@ -3,13 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:getxdemo/firebase_options.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
+import 'package:getxdemo/pages/list_view_demo/list_vide_demo_page.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
-import 'package:getxdemo/pages/swiper_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
 import 'package:getxdemo/route/route.dart';
@@ -222,6 +221,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Get.updateLocale(Locale('zh'));
                   }
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const ListViewDemoPage()),
+                child: const Text('ListViewDemoPage'),
               ),
               ElevatedButton(
                 onPressed: () => Get.to(() => const CustomPainterDemo()),

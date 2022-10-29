@@ -50,9 +50,11 @@ dependencies:
     git:
       url: git@github.com:moweiran/flutter_easyloading.git
   flutter_custom_dialog: ^1.2.0
-  firebase_messaging: ^11.2.11
-  firebase_core: ^1.13.1
   extended_wrap: ^0.1.0
+  flutter_list_view: ^1.1.18
+  flutter_html: ^2.2.1
+  shimmer: ^2.0.0
+  flutter_aliplayer: ^5.4.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
