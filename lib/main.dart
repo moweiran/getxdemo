@@ -1,4 +1,3 @@
-import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -9,30 +8,19 @@ import 'package:getxdemo/pages/animation/animation_controller.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
-import 'package:getxdemo/pages/web_socket/web_socket_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/store/main_store.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
-import 'pages/emoji/emoji_demo.dart';
-import 'pages/fijkplayer/home_page.dart';
-import 'pages/graphql_example/graphql_example_page.dart';
-import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
+import 'pages/firebase_recaptctha/firebase_recaptcha_demo.dart';
 import 'pages/inherited_notifier/slider_info.dart';
-import 'pages/readmore/readmore_demo.dart';
-import 'pages/shimmer/shimmer_demo.dart';
-import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
-import 'pages/socket/socket_demo.dart';
-import 'pages/youtube_player/youtube_player_demo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initHiveForFlutter();
   runApp(const MyApp());
 }
 
@@ -41,47 +29,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final HttpLink httpLink = HttpLink(
-      'http://localhost:4000/',
-    );
-    late final ValueNotifier<GraphQLClient> client = ValueNotifier(
-      GraphQLClient(
-        link: httpLink,
-        cache: GraphQLCache(
-          store: HiveStore(),
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => CatalogModel()),
+        ChangeNotifierProxyProvider<CatalogModel, CartModel>(
+          create: (context) => CartModel(),
+          update: (context, catalog, cart) {
+            if (cart == null) throw ArgumentError.notNull('cart');
+            cart.catalog = catalog;
+            return cart;
+          },
         ),
-      ),
-    );
-    return GraphQLProvider(
-      client: client,
-      child: MultiProvider(
-        providers: [
-          Provider(create: (context) => CatalogModel()),
-          ChangeNotifierProxyProvider<CatalogModel, CartModel>(
-            create: (context) => CartModel(),
-            update: (context, catalog, cart) {
-              if (cart == null) throw ArgumentError.notNull('cart');
-              cart.catalog = catalog;
-              return cart;
-            },
+      ],
+      child: OverlaySupport.global(
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          initialRoute: '/home',
+          getPages: DemoRoute.routes,
+          theme: ThemeData(
+            highlightColor: Colors.transparent,
+            brightness: Brightness.light,
+            primarySwatch: Colors.purple,
           ),
-        ],
-        child: OverlaySupport.global(
-          child: GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            initialRoute: '/home',
-            getPages: DemoRoute.routes,
-            theme: ThemeData(
-              highlightColor: Colors.transparent,
-              brightness: Brightness.light,
-              primarySwatch: Colors.purple,
-            ),
-            defaultTransition: Transition.native,
-            translations: MyTranslations(),
-            locale: const Locale('en'),
-            builder: EasyLoading.init(),
-          ),
+          defaultTransition: Transition.native,
+          translations: MyTranslations(),
+          locale: const Locale('en'),
+          builder: EasyLoading.init(),
         ),
       ),
     );
@@ -167,6 +141,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: Theme.of(context).textTheme.headline4,
                   );
                 },
+              ),
+              ElevatedButton(
+                onPressed: () => Get.to(() => const FirebaseRecaptchaDemo()),
+                child: const Text('FirebaseRecaptchaDemo'),
               ),
               ElevatedButton(
                 child: Text('button_text'.tr),

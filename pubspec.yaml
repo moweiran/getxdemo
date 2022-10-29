@@ -54,16 +54,10 @@ dependencies:
   readmore: ^2.2.0
   expandable: ^5.0.1
   hashtagable: ^2.1.0
-  graphql_flutter: ^5.1.0
-  flutter_hooks: ^0.18.3
-  youtube_player_flutter: ^8.0.0
-  fijkplayer: ^0.10.1
   streaming_shared_preferences: ^2.0.0
   shimmer: ^2.0.0
-  web_socket_channel: ^2.2.0
-  socket_io_client: ^2.0.0
-  flutter_list_view: ^1.1.18
-  flutter_html: ^2.2.1
+  flutter_firebase_recaptcha: ^1.0.2
+  flutter_inappwebview: 5.4.4+3
 dev_dependencies:
   flutter_test:
     sdk: flutter

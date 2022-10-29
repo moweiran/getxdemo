@@ -23,8 +23,6 @@ import 'package:getxdemo/screens/easyrefhres_demo.dart';
 import 'package:getxdemo/screens/easyrefresh.dart';
 import 'package:getxdemo/screens/overlay_page.dart';
 
-import '../pages/list_view_demo/list_vide_demo_page.dart';
-
 class DemoRoute {
   static List<GetPage> get routes => [
         //Simple GetPage
@@ -36,10 +34,7 @@ class DemoRoute {
           name: '/animotion',
           page: () => const AnimationDemoPage(),
         ),
-        GetPage(
-          name: '/ListViewDemoPage',
-          page: () => const ListViewDemoPage(),
-        ),
+
         GetPage(
           name: '/extend_nestedscrollview',
           page: () => const PullToRefreshOuterDemo(),
