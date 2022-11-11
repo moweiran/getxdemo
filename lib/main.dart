@@ -7,6 +7,7 @@ import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
 import 'package:getxdemo/pages/custom_painter/custom_painter_demo.dart';
 import 'package:getxdemo/pages/emoji/textfield_emojis_demo.dart';
+import 'package:getxdemo/pages/photo_manager_demo/photo_manager_demo.dart';
 import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
@@ -99,6 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('${value.count}'),
           );
         },
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const PhotoManagerPageDemo()),
+        child: const Text('PhotoManagerPageDemo'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const TextFieldEmojiDemoPage()),
