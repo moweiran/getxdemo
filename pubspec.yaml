@@ -56,8 +56,7 @@ dependencies:
   hashtagable: ^2.1.0
   streaming_shared_preferences: ^2.0.0
   shimmer: ^2.0.0
-  flutter_firebase_recaptcha: ^1.0.2
-  flutter_inappwebview: 5.4.4+3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -86,7 +85,6 @@ flutter:
     - assets/images/2.png
     - assets/images/3.png
     - assets/cover.png
-    - assets/butterfly.mp4
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
