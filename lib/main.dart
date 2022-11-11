@@ -11,12 +11,10 @@ import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
-import 'package:getxdemo/pages/web_socket/web_socket_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/store/main_store.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
-import 'package:super_tooltip/super_tooltip.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
@@ -258,88 +256,39 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => Get.toNamed('SliverIndexedStackDemo'),
         child: const Text('SliverIndexedStackDemo'),
       ),
-      ElevatedButton(
-        onPressed: () {
-          // popup a toast.
-          // toast('Hello world!');
-
-          // // show a notification at top of screen.
-          // showSimpleNotification(
-          //     Text("this is a message from simple notification"),
-          //     background: Colors.green);
-
-          // We create the tooltip on the first use
-          var tooltip = SuperTooltip(
-            popupDirection: TooltipDirection.down,
-            content: const Material(
-                child: Text(
-              "Lorem ipsum dolor sit amet, consetetur sadipscingelitr, "
-              "sed diam nonumy eirmod tempor invidunt ut laboreet dolore magna aliquyam erat, "
-              "sed diam voluptua. At vero eos et accusam et justoduo dolores et ea rebum. ",
-              softWrap: true,
-            )),
-          );
-
-          tooltip.show(context);
-        },
-        child: const Text('tooltip'),
-      ),
     ];
+
     return ChangeNotifierProvider.value(
       value: store,
       child: Scaffold(
         appBar: AppBar(
           title: Text("title".trArgs(['John'])),
         ),
-        body: GridView.builder(
-          padding: const EdgeInsets.all(15),
-          itemCount: buttons.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1, //Grid按两列显示
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 8,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: buttons,
           ),
-          itemBuilder: (context, index) {
-            return buttons[index];
-          },
         ),
-        // body: SingleChildScrollView(
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: <Widget>[
-
-        //       const SecondPage(),
-        //       const ThirdPage(),
-        //       Container(
-        //         child: RichText(
-        //           maxLines: 2,
-        //           text: const TextSpan(
-        //             children: [
-        //               WidgetSpan(
-        //                 child: const Chip(
-        //                   label: Text('123123'),
-        //                 ),
-        //               )
-        //             ],
-        //           ),
-        //         ),
-        //       )
-        //     ],
-        //   ),
-        // ),
-        floatingActionButton: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              onPressed: () {
-                store.incrementCounter();
-              },
-              tooltip: 'button_text'.tr,
-              child: const Icon(Icons.add),
-            ),
-          ],
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        // floatingActionButton: Column(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     FloatingActionButton(
+        //       onPressed: () {
+        //         store.incrementCounter();
+        //       },
+        //       tooltip: 'button_text'.tr,
+        //       child: const Icon(Icons.add),
+        //     ),
+        //     FloatingActionButton(
+        //       onPressed: () {
+        //         store.incrementSecondCounter();
+        //       },
+        //       tooltip: 'button_text'.tr,
+        //       child: const Icon(Icons.add),
+        //     )
+        //   ],
+        // ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }

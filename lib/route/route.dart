@@ -34,6 +34,7 @@ class DemoRoute {
           name: '/animotion',
           page: () => const AnimationDemoPage(),
         ),
+
         GetPage(
           name: '/extend_nestedscrollview',
           page: () => const PullToRefreshOuterDemo(),
