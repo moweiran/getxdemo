@@ -24,7 +24,6 @@ import 'pages/inherited_notifier/slider_info.dart';
 import 'pages/readmore/readmore_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
-import 'pages/socket/socket_demo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -108,14 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ElevatedButton(
         onPressed: () => Get.to(() => const EmojiDemoPage()),
         child: const Text('EmojiDemoPage'),
-      ),
-      ElevatedButton(
-        onPressed: () => Get.to(() => const SocketDemoPage()),
-        child: const Text('SocketDemoPage'),
-      ),
-      ElevatedButton(
-        onPressed: () => Get.to(() => const WebSocketDemoPage()),
-        child: const Text('WebSocketDemo'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const ShowModalBottomSheet()),
