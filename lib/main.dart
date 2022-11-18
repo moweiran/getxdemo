@@ -7,6 +7,7 @@ import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
 import 'package:getxdemo/pages/custom_painter/custom_painter_demo.dart';
 import 'package:getxdemo/pages/emoji/textfield_emojis_demo.dart';
+import 'package:getxdemo/pages/mock_demo/mock_demo_page.dart';
 import 'package:getxdemo/pages/photo_manager_demo/photo_manager_demo.dart';
 import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
@@ -20,9 +21,11 @@ import 'package:provider/provider.dart';
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
 import 'pages/emoji/emoji_demo.dart';
+import 'pages/future_demo/future_demo_page.dart';
 import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
 import 'pages/inherited_notifier/slider_info.dart';
 import 'pages/readmore/readmore_demo.dart';
+import 'pages/render_object/render_objrect_page_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
 
@@ -100,6 +103,18 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('${value.count}'),
           );
         },
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const MockDemoPage()),
+        child: const Text('MockDemoPage'),
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const FutureDemoPage()),
+        child: const Text('FutureDemoPage'),
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const RenderObjectPageDemo()),
+        child: const Text('RenderObjectPageDemo'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const PhotoManagerPageDemo()),
