@@ -26,7 +26,7 @@ class _ShirtRenderBox extends RenderBox {
 
   set color(Color value) {
     if (value == color) return;
-    _color = color;
+    _color = value;
     markNeedsPaint();
   }
 
