@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:getxdemo/pages/render_object/circle_widget.dart';
 import 'package:getxdemo/pages/render_object/shirt_widget.dart';
 
+import 'custom_text_widget.dart';
+
 class RenderObjectPageDemo extends StatefulWidget {
   const RenderObjectPageDemo({Key? key}) : super(key: key);
 
@@ -19,24 +21,12 @@ class _RenderObjectPageDemoState extends State<RenderObjectPageDemo> {
       body: Column(
         children: [
           Expanded(
-            flex: 1,
-            child: Opacity(
-              opacity: 0.9,
-              child: Container(
-                color: Colors.amber,
-              ),
+            child: CustomTextWidget(
+              text: 'abc2782738497289347982734729834733339323232323',
+              maxLines: 2,
             ),
           ),
-          const Expanded(
-            flex: 1,
-            child: CircleLogoWidget(),
-          ),
-          const Expanded(
-            flex: 1,
-            child: ShirtWidget(
-              color: Colors.black,
-            ),
-          ),
+          Text('abc')
         ],
       ),
     );
