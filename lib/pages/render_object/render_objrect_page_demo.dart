@@ -16,17 +16,17 @@ class _RenderObjectPageDemoState extends State<RenderObjectPageDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('render object'),
-      ),
+          // title: const Text('render object'),
+          ),
       body: Column(
         children: [
           Expanded(
             child: CustomTextWidget(
               text: 'abc2782738497289347982734729834733339323232323',
-              maxLines: 2,
+              maxLines: 1,
             ),
           ),
-          Text('abc')
+          Text('ab3sss3c')
         ],
       ),
     );

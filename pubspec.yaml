@@ -59,6 +59,8 @@ dependencies:
   photo_manager: ^2.5.0
   dio: ^4.0.6
   http_mock_adapter: ^0.3.3
+  video_player: ^2.4.8
+  visibility_detector: ^0.2.2
 
 dev_dependencies:
   flutter_test:
