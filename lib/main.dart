@@ -20,6 +20,8 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
+import 'pages/bottom_navigator/bottom_app_bar_demo.dart';
+import 'pages/bottom_navigator/bottom_navigator_demo.dart';
 import 'pages/custom_painters/custom_painter_demo.dart';
 import 'pages/emoji/emoji_demo.dart';
 import 'pages/future_demo/future_demo_page.dart';
@@ -104,6 +106,19 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text('${value.count}'),
           );
         },
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(
+          () => const ColorFiltered(
+            colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
+            child: BottomAppBarDemo(),
+          ),
+        ),
+        child: const Text('BottomAppBarDemo'),
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const BottomNavigatorPageDemo()),
+        child: const Text('BottomNavigatorPageDemo'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const GridViewVideoPlayerDemo()),
