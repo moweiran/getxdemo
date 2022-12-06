@@ -469,12 +469,13 @@ class OverLayStatePage extends State<OverLayPage> {
   }
 
   _itemBtn(text, index, color) {
-    return FlatButton(
-        onPressed: () => _itemClick(index),
-        child: Center(
-            child: Text(text,
-                style: TextStyle(color: Colors.white, fontSize: 16.0))),
-        color: color);
+    return ElevatedButton(
+      onPressed: () => _itemClick(index),
+      child: Center(
+          child: Text(text,
+              style: TextStyle(color: Colors.white, fontSize: 16.0))),
+      style: ButtonStyle(backgroundColor: color),
+    );
   }
 
   _itemClick(index) {

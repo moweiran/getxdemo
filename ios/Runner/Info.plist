@@ -49,5 +49,7 @@
 	<string>VAMA needs to access your microphone to record audio for your livestream</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>VAMA needs access to your photo library to upload your avatar and cover, share your photos and videos to your friends.</string>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>
