@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -5,19 +7,25 @@ import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
+import 'package:getxdemo/pages/aop_demo/aop_demo.dart';
 import 'package:getxdemo/pages/custom_painter/custom_painter_demo.dart';
 import 'package:getxdemo/pages/emoji/textfield_emojis_demo.dart';
 import 'package:getxdemo/pages/gridview_video_player/gridview_video_player_demo.dart';
+import 'package:getxdemo/pages/isolate_page/isolate_demo_page.dart';
 import 'package:getxdemo/pages/mock_demo/mock_demo_page.dart';
 import 'package:getxdemo/pages/photo_manager_demo/photo_manager_demo.dart';
 import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
 import 'package:getxdemo/pages/stack/stack_positioned_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_demo.dart';
 import 'package:getxdemo/pages/easyloading/easyloading_page1.dart';
+import 'package:getxdemo/pages/work_manager/work_manager_demo.dart';
 import 'package:getxdemo/route/route.dart';
 import 'package:getxdemo/store/main_store.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'extend_wrap/extend_wrap_demo.dart';
 import 'pages/bottom_navigator/bottom_app_bar_demo.dart';
@@ -31,6 +39,62 @@ import 'pages/readmore/readmore_demo.dart';
 import 'pages/render_object/render_objrect_page_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
+
+const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
+const rescheduledTaskKey = "be.tramckrijte.workmanagerExample.rescheduledTask";
+const failedTaskKey = "be.tramckrijte.workmanagerExample.failedTask";
+const simpleDelayedTask = "be.tramckrijte.workmanagerExample.simpleDelayedTask";
+const simplePeriodicTask =
+    "be.tramckrijte.workmanagerExample.simplePeriodicTask";
+const simplePeriodic1HourTask =
+    "be.tramckrijte.workmanagerExample.simplePeriodic1HourTask";
+
+// Mandatory if the App is obfuscated or using Flutter 3.1+
+@pragma('vm:entry-point')
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) async {
+    switch (task) {
+      case simpleTaskKey:
+        print("$simpleTaskKey was executed. inputData = $inputData");
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setBool("test", true);
+        print("Bool from prefs: ${prefs.getBool("test")}");
+        break;
+      case rescheduledTaskKey:
+        final key = inputData!['key']!;
+        final prefs = await SharedPreferences.getInstance();
+        if (prefs.containsKey('unique-$key')) {
+          print('has been running before, task is successful');
+          return true;
+        } else {
+          await prefs.setBool('unique-$key', true);
+          print('reschedule task');
+          return false;
+        }
+      case failedTaskKey:
+        print('failed task');
+        return Future.error('failed');
+      case simpleDelayedTask:
+        print("$simpleDelayedTask was executed");
+        break;
+      case simplePeriodicTask:
+        print("$simplePeriodicTask was executed");
+        break;
+      case simplePeriodic1HourTask:
+        print("$simplePeriodic1HourTask was executed");
+        break;
+      case Workmanager.iOSBackgroundTask:
+        print("The iOS background fetch was triggered");
+        Directory? tempDir = await getTemporaryDirectory();
+        String? tempPath = tempDir.path;
+        print(
+            "You can access other plugins in the background, for example Directory.getTemporaryDirectory(): $tempPath");
+        break;
+    }
+
+    return Future.value(true);
+  });
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -108,6 +172,14 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
       ElevatedButton(
+        onPressed: () => Get.to(() => const IsolateDemoPage()),
+        child: const Text('IsolateDemoPage'),
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const WorkManagerDemoPage()),
+        child: const Text('WorkManagerDemoPage'),
+      ),
+      ElevatedButton(
         onPressed: () => Get.to(
           () => const ColorFiltered(
             colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
@@ -115,6 +187,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         child: const Text('BottomAppBarDemo'),
+      ),
+      ElevatedButton(
+        onPressed: () => Get.to(() => const AopDemoPage()),
+        child: const Text('AopDemoPage'),
       ),
       ElevatedButton(
         onPressed: () => Get.to(() => const BottomNavigatorPageDemo()),

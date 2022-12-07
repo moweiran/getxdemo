@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>be.tramckrijte.workmanagerExample.taskId</string>
+		<string>be.tramckrijte.workmanagerExample.simpleTask</string>
+		<string>be.tramckrijte.workmanagerExample.rescheduledTask</string>
+		<string>be.tramckrijte.workmanagerExample.failedTask</string>
+		<string>be.tramckrijte.workmanagerExample.simpleDelayedTask</string>
+		<string>be.tramckrijte.workmanagerExample.simplePeriodicTask</string>
+		<string>be.tramckrijte.workmanagerExample.simplePeriodic1HourTask</string>
+	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -24,6 +36,17 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>VAMA uses the camera to upload photos and videos to post your content</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>VAMA needs to access your microphone to record audio for your livestream</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>VAMA needs access to your photo library to upload your avatar and cover, share your photos and videos to your friends.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -43,13 +66,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>VAMA uses the camera to upload photos and videos to post your content</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>VAMA needs to access your microphone to record audio for your livestream</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>VAMA needs access to your photo library to upload your avatar and cover, share your photos and videos to your friends.</string>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
 </dict>
 </plist>

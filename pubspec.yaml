@@ -61,6 +61,10 @@ dependencies:
   http_mock_adapter: ^0.3.3
   video_player: ^2.4.8
   visibility_detector: ^0.3.3
+  worker_manager: ^4.4.6
+  workmanager: ^0.5.1
+  shared_preferences: ^2.0.15
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
