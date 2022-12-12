@@ -15,27 +15,16 @@ class WorkManagerDemoPage extends StatefulWidget {
 }
 
 class _WorkManagerDemoPageState extends State<WorkManagerDemoPage> {
-  Timer? _timer;
   String _timerTime = '';
-  /*WorkerManager is Singleton. Just create link it everywhere you want*/
-  // final workerManager = WorkerManager();
-  // int clicks = 0;
-  // List results = [];
-  // DateTime time;
+  // e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"workmanager.background.task"]
 
   @override
   void initState() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      _timerTime = DateTime.now().toString();
-      print(_timerTime);
-      setState(() {});
-    });
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     super.dispose();
   }
 

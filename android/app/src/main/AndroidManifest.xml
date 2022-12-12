@@ -1,12 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.getxdemo">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+
    <application
         android:label="getxdemo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- android:name=".MainActivity" -->
+        <!--生物识别 要求替换为io.flutter.app.android.SplashScreenUntilFirstFrame-->
         <activity
-            android:name=".MainActivity"
+            android:name="io.flutter.embedding.android.FlutterFragmentActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

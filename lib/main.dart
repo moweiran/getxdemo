@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import 'package:getxdemo/pages/custom_painter/custom_painter_demo.dart';
 import 'package:getxdemo/pages/emoji/textfield_emojis_demo.dart';
 import 'package:getxdemo/pages/gridview_video_player/gridview_video_player_demo.dart';
 import 'package:getxdemo/pages/isolate_page/isolate_demo_page.dart';
+import 'package:getxdemo/pages/local_auth/local_auth_demo.dart';
 import 'package:getxdemo/pages/mock_demo/mock_demo_page.dart';
 import 'package:getxdemo/pages/photo_manager_demo/photo_manager_demo.dart';
 import 'package:getxdemo/pages/share_data/inherited_widget_test_demo.dart';
@@ -39,6 +41,7 @@ import 'pages/readmore/readmore_demo.dart';
 import 'pages/render_object/render_objrect_page_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
+import 'pages/vision_detector_views/text_detector_view.dart';
 
 const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
 const rescheduledTaskKey = "be.tramckrijte.workmanagerExample.rescheduledTask";
@@ -96,8 +99,13 @@ void callbackDispatcher() {
   });
 }
 
+late List<CameraDescription> cameras;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  cameras = await availableCameras();
+
   runApp(const MyApp());
 }
 
@@ -160,6 +168,15 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  Widget _buildButton(
+    Widget nextPage,
+  ) {
+    return ElevatedButton(
+      onPressed: () => Get.to(() => nextPage),
+      child: Text(nextPage.runtimeType.toString()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     buttons = [
@@ -171,23 +188,18 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       ),
-      ElevatedButton(
-        onPressed: () => Get.to(() => const IsolateDemoPage()),
-        child: const Text('IsolateDemoPage'),
-      ),
-      ElevatedButton(
-        onPressed: () => Get.to(() => const WorkManagerDemoPage()),
-        child: const Text('WorkManagerDemoPage'),
-      ),
-      ElevatedButton(
-        onPressed: () => Get.to(
-          () => const ColorFiltered(
-            colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
-            child: BottomAppBarDemo(),
-          ),
-        ),
-        child: const Text('BottomAppBarDemo'),
-      ),
+      _buildButton(const TextRecognizerView()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const IsolateDemoPage()),
+      _buildButton(const WorkManagerDemoPage()),
+      _buildButton(const BottomAppBarDemo()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const LocalAuthDemoPage()),
+      _buildButton(const LocalAuthDemoPage()),
       ElevatedButton(
         onPressed: () => Get.to(() => const AopDemoPage()),
         child: const Text('AopDemoPage'),
@@ -371,10 +383,12 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text("title".trArgs(['John'])),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: buttons,
+        body: MaterialApp(
+          home: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: buttons,
+            ),
           ),
         ),
         // floatingActionButton: Column(
