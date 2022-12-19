@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_floatwing/flutter_floatwing.dart';
 import 'package:get/get.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
@@ -37,6 +39,7 @@ import 'pages/emoji/emoji_demo.dart';
 import 'pages/future_demo/future_demo_page.dart';
 import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
 import 'pages/inherited_notifier/slider_info.dart';
+import 'pages/local_notification/local_notification_demo_page.dart';
 import 'pages/readmore/readmore_demo.dart';
 import 'pages/render_object/render_objrect_page_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
@@ -101,6 +104,20 @@ void callbackDispatcher() {
 
 late List<CameraDescription> cameras;
 
+@pragma("vm:entry-point")
+void myOverlayMain() {
+  // runApp(const MaterialApp(
+  //   debugShowCheckedModeBanner: false,
+  //   home: NonrmalView(),
+  // ));
+  runApp(((_) => const NonrmalView())
+      .floatwing(
+        app: true,
+        debug: false,
+      )
+      .make());
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -156,25 +173,82 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   MainStoreProvider store = MainStoreProvider();
 
   SliderInfo sliderInfo = SliderInfo();
 
   List<Widget> buttons = [];
 
+  bool systemAlertWindowPermission = false;
+  bool isRunning = false;
+
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    initAsyncState();
     super.initState();
   }
 
-  Widget _buildButton(
-    Widget nextPage,
-  ) {
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  Widget _buildButton(Widget nextPage) {
     return ElevatedButton(
       onPressed: () => Get.to(() => nextPage),
       child: Text(nextPage.runtimeType.toString()),
     );
+  }
+
+  initAsyncState() async {
+    systemAlertWindowPermission = await FloatwingPlugin().checkPermission();
+    isRunning = await FloatwingPlugin().isServiceRunning();
+
+    // get permission first
+    if (!systemAlertWindowPermission) {
+      FloatwingPlugin().openPermissionSetting();
+      return;
+    }
+
+    // start service
+    if (!isRunning) {
+      FloatwingPlugin().startService();
+    }
+
+    // initialize the plugin at first.
+    FloatwingPlugin().initialize();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive) {
+      if (systemAlertWindowPermission) {
+        _startWindow();
+      }
+    }
+    // if (state == AppLifecycleState.resumed) {
+    //   if (systemAlertWindowPermission) {
+    //     FloatwingPlugin().windows['consult']?.close(force: true);
+    //   }
+    // }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  void _startWindow() async {
+    // define window config and start the window from config.
+    await WindowConfig(
+      id: "consult",
+      callback: myOverlayMain,
+      entry: "myOverlayMain",
+      draggable: true,
+      height: 300,
+      width: 300,
+      x: 200,
+      y: 200,
+    ).to().create(start: true);
   }
 
   @override
@@ -188,6 +262,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       ),
+      _buildButton(const LocalNotificationDemoPage()),
       _buildButton(const TextRecognizerView()),
       _buildButton(const LocalAuthDemoPage()),
       _buildButton(const IsolateDemoPage()),
@@ -383,33 +458,12 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text("title".trArgs(['John'])),
         ),
-        body: MaterialApp(
-          home: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: buttons,
-            ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: buttons,
           ),
         ),
-        // floatingActionButton: Column(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     FloatingActionButton(
-        //       onPressed: () {
-        //         store.incrementCounter();
-        //       },
-        //       tooltip: 'button_text'.tr,
-        //       child: const Icon(Icons.add),
-        //     ),
-        //     FloatingActionButton(
-        //       onPressed: () {
-        //         store.incrementSecondCounter();
-        //       },
-        //       tooltip: 'button_text'.tr,
-        //       child: const Icon(Icons.add),
-        //     )
-        //   ],
-        // ), // This trailing comma makes auto-formatting nicer for build methods.
       ),
     );
   }
@@ -429,4 +483,39 @@ class MyTranslations extends Translations {
           'button2': '按钮2',
         },
       };
+}
+
+class NonrmalView extends StatefulWidget {
+  const NonrmalView({super.key});
+
+  @override
+  State<NonrmalView> createState() => _NonrmalViewState();
+}
+
+class _NonrmalViewState extends State<NonrmalView> {
+  Window? w;
+  bool dragging = false;
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      w = Window.of(context);
+      w?.on(EventType.WindowDragStart, (window, data) {
+        if (mounted) setState(() => {dragging = true});
+      }).on(EventType.WindowDragEnd, (window, data) {
+        if (mounted) setState(() => {dragging = false});
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        w?.launchMainActivity();
+      },
+      child: const Text('OK'),
+    );
+  }
 }
