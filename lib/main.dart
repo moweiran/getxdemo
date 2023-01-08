@@ -40,6 +40,7 @@ import 'pages/future_demo/future_demo_page.dart';
 import 'pages/inherited_notifier/inherited_notifier_second_page.dart';
 import 'pages/inherited_notifier/slider_info.dart';
 import 'pages/local_notification/local_notification_demo_page.dart';
+import 'pages/pin_demo/pin_demo_page.dart';
 import 'pages/readmore/readmore_demo.dart';
 import 'pages/render_object/render_objrect_page_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
@@ -262,6 +263,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           );
         },
       ),
+      _buildButton(PinDemoPage()),
       _buildButton(const LocalNotificationDemoPage()),
       _buildButton(const TextRecognizerView()),
       _buildButton(const LocalAuthDemoPage()),
