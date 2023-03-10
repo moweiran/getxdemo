@@ -3,14 +3,17 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_floatwing/flutter_floatwing.dart';
 import 'package:get/get.dart';
+import 'package:getxdemo/channel.dart';
 import 'package:getxdemo/models/cart.dart';
 import 'package:getxdemo/models/catalog.dart';
 import 'package:getxdemo/pages/animation/animation.dart';
 import 'package:getxdemo/pages/animation/animation_controller.dart';
 import 'package:getxdemo/pages/aop_demo/aop_demo.dart';
+import 'package:getxdemo/pages/channel_demo/channel_demo_page.dart';
 import 'package:getxdemo/pages/custom_painter/custom_painter_demo.dart';
 import 'package:getxdemo/pages/emoji/textfield_emojis_demo.dart';
 import 'package:getxdemo/pages/gridview_video_player/gridview_video_player_demo.dart';
@@ -46,6 +49,7 @@ import 'pages/render_object/render_objrect_page_demo.dart';
 import 'pages/shimmer/shimmer_demo.dart';
 import 'pages/show_modal_bottom/show_modal_bottom_demo.dart';
 import 'pages/vision_detector_views/text_detector_view.dart';
+import './channel.dart' as channel;
 
 const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
 const rescheduledTaskKey = "be.tramckrijte.workmanagerExample.rescheduledTask";
@@ -125,6 +129,8 @@ void main() async {
   cameras = await availableCameras();
 
   runApp(const MyApp());
+
+  channel.register();
 }
 
 class MyApp extends StatelessWidget {
@@ -263,6 +269,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           );
         },
       ),
+      _buildButton(const ChannelDemoPage()),
       _buildButton(PinDemoPage()),
       _buildButton(const LocalNotificationDemoPage()),
       _buildButton(const TextRecognizerView()),

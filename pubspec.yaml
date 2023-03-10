@@ -76,6 +76,7 @@ dependencies:
   flutter_background: ^1.1.0
   bubble: ^1.2.1
   pin_input_text_field: ^4.2.0
+  flutter_multi_formatter: ^2.2.1
 
 dev_dependencies:
   flutter_test:
